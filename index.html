@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reserva de Equipamentos - Oficina</title>
+    <!-- Tailwind CSS via CDN para manter simplicidade sem configurar PostCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script>
@@ -22,16 +23,20 @@
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.1/",
+    "vite": "https://esm.sh/vite@^7.2.7",
+    "react/": "https://esm.sh/react@^19.2.1/",
+    "react": "https://esm.sh/react@^19.2.1",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.10.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "recharts": "https://esm.sh/recharts@^3.5.1"
   }
 }
 </script>
 </head>
   <body class="bg-gray-50 text-slate-800">
     <div id="root"></div>
+    <!-- O Vite injetará o código compilado aqui através deste script -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
