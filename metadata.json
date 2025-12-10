@@ -1,0 +1,5 @@
+{
+  "name": "OficinaReserva",
+  "description": "Sistema de gerenciamento de reservas para equipamentos de oficina com calendário interativo e relatórios.",
+  "requestFramePermissions": []
+}
