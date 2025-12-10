@@ -18,7 +18,10 @@ class ReservationService {
         .from(TABLE_RESERVATIONS)
         .select('*');
 
-      if (error) throw error;
+      if (error) {
+        console.error("Erro Supabase (Get):", error);
+        throw error;
+      }
       
       if (!data) return [];
 
@@ -35,8 +38,10 @@ class ReservationService {
         createdAt: item.createdAt
       }));
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao buscar reservas:", error);
+      // Não lançamos erro aqui para não travar a tela inteira, apenas logamos
+      // e retornamos array vazio, mas idealmente poderíamos notificar o usuário
       return [];
     }
   }
@@ -81,8 +86,13 @@ class ReservationService {
       .select();
 
     if (error) {
-      console.error(error);
-      throw new Error("Erro ao salvar no banco de dados.");
+      console.error("Erro detalhado Supabase:", error);
+      // Retorna a mensagem técnica para ajudar no debug
+      throw new Error(`Erro DB: ${error.message} (Cód: ${error.code}) - Dica: ${error.hint || 'Nenhuma'}`);
+    }
+
+    if (!data || data.length === 0) {
+       throw new Error("Erro desconhecido: Nenhum dado retornado após inserção.");
     }
 
     return {
@@ -100,9 +110,9 @@ class ReservationService {
         .eq('id', id);
 
       if (error) throw error;
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao deletar reserva:", error);
-      throw new Error("Não foi possível cancelar a reserva.");
+      throw new Error(`Erro ao cancelar: ${error.message || 'Erro desconhecido'}`);
     }
   }
 }
